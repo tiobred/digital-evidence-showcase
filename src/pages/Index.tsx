@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { ChevronDown, Users, BookOpen, Gavel, Shield, Search, FileText } from 'lucide-react';
+import { ChevronDown, Users, BookOpen, Gavel, Shield, Search, FileText, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -45,18 +46,26 @@ const Index = () => {
               <Gavel className="h-6 w-6 text-blue-400" />
               <span className="font-bold text-lg">CNJ - Provas Digitais</span>
             </div>
-            <div className="hidden md:flex space-x-6">
-              {['Abertura', 'Palestras', 'Práticas', 'Vestígios', 'Conclusões'].map((item, index) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className={`text-sm transition-colors hover:text-blue-400 ${
-                    currentSection === index + 1 ? 'text-blue-400' : 'text-gray-300'
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
+            <div className="flex items-center space-x-6">
+              <div className="hidden md:flex space-x-6">
+                {['Abertura', 'Palestras', 'Práticas', 'Vestígios', 'Conclusões'].map((item, index) => (
+                  <button
+                    key={item}
+                    onClick={() => scrollToSection(item.toLowerCase())}
+                    className={`text-sm transition-colors hover:text-blue-400 ${
+                      currentSection === index + 1 ? 'text-blue-400' : 'text-gray-300'
+                    }`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+              <Link to="/referencias">
+                <Button variant="outline" size="sm" className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white">
+                  <Upload className="h-4 w-4 mr-2" />
+                  Gerenciar Referências
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
