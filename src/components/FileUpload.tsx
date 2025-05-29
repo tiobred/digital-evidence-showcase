@@ -14,6 +14,18 @@ const FileUpload = ({ onUploadSuccess }: FileUploadProps) => {
   const [uploading, setUploading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
+  const sanitizeFileName = (fileName: string) => {
+    // Remove acentos e caracteres especiais
+    const sanitized = fileName
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+      .replace(/[^a-zA-Z0-9.-]/g, '_') // Substitui caracteres especiais por underscore
+      .replace(/_{2,}/g, '_') // Remove múltiplos underscores consecutivos
+      .toLowerCase();
+    
+    return sanitized;
+  };
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     setSelectedFiles(files);
@@ -33,7 +45,10 @@ const FileUpload = ({ onUploadSuccess }: FileUploadProps) => {
     
     try {
       for (const file of selectedFiles) {
-        const fileName = `${Date.now()}-${file.name}`;
+        const sanitizedName = sanitizeFileName(file.name);
+        const fileName = `${Date.now()}-${sanitizedName}`;
+        
+        console.log(`Uploading file: ${file.name} as ${fileName}`);
         
         const { error } = await supabase.storage
           .from('referencias')
