@@ -397,7 +397,7 @@ const Index = () => {
                       <h4 className="font-semibold text-red-800 mb-3">Abuso Sexual Infantil</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• 88% dos casos: agressor próximo</li>
-                        <li>• Maioria: meninas < 13 anos</li>
+                        <li>• Maioria: meninas &lt; 13 anos</li>
                         <li>• 770 vítimas resgatadas</li>
                         <li>• Análise prévia no local</li>
                       </ul>
